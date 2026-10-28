@@ -189,6 +189,14 @@ p {
   border-radius: 28px;
 }
 
+.hero-media {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  object-fit: contain;
+}
+
 .hero-image span,
 .card-placeholder span,
 .detail-image span {
@@ -259,14 +267,14 @@ p {
 }
 
 .media-image {
-  min-height: 320px;
-  aspect-ratio: 4 / 5;
+  height: auto;
+  object-fit: contain;
 }
 
 .detail-media {
-  min-height: 620px;
+  height: auto;
   border-radius: 26px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .card-meta {

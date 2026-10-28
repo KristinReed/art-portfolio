@@ -21,6 +21,7 @@ const mediaSrc = art.data.src;
         class="media-frame media-image"
         src={mediaSrc}
         alt={art.data.alt ?? art.data.title}
+        style={`aspect-ratio: ${art.data.aspectRatio};`}
       />
     ) : (
       <div

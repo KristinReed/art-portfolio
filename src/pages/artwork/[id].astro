@@ -30,7 +30,12 @@ const mediaSrc = art.data.src;
           <source src={mediaSrc} type="video/mp4" />
         </video>
       ) : mediaSrc ? (
-        <img class="media-frame detail-media" src={mediaSrc} alt={art.data.alt ?? art.data.title} />
+        <img
+          class="media-frame detail-media"
+          src={mediaSrc}
+          alt={art.data.alt ?? art.data.title}
+          style={`aspect-ratio: ${art.data.aspectRatio};`}
+        />
       ) : (
         <div
           class="art-placeholder detail-image"

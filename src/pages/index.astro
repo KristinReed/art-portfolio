@@ -23,14 +23,23 @@ const categories = [...new Set(artwork.map((art) => art.data.category))];
     featured && (
       <section class="hero">
         <a href={`/artwork/${featured.id}/`}>
-          <div
-            class="art-placeholder hero-image"
-            role="img"
-            aria-label={featured.data.alt ?? featured.data.title}
-            style={`background: ${featured.data.placeholder};`}
-          >
-            <span>{featured.data.title}</span>
-          </div>
+          {featured.data.mediaType === 'image' && featured.data.src ? (
+            <img
+              class="hero-image hero-media"
+              src={featured.data.src}
+              alt={featured.data.alt ?? featured.data.title}
+              style={`aspect-ratio: ${featured.data.aspectRatio};`}
+            />
+          ) : (
+            <div
+              class="art-placeholder hero-image"
+              role="img"
+              aria-label={featured.data.alt ?? featured.data.title}
+              style={`background: ${featured.data.placeholder};`}
+            >
+              <span>{featured.data.title}</span>
+            </div>
+          )}
         </a>
       </section>
     )
