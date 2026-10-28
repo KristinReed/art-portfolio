@@ -1,0 +1,47 @@
+---
+const { art } = Astro.props;
+const mediaType = art.data.mediaType ?? 'placeholder';
+const mediaSrc = art.data.src;
+---
+
+<article class="card">
+  <a href={`/artwork/${art.id}`} aria-label={`View ${art.data.title}`}>
+    {mediaType === 'video' && mediaSrc ? (
+      <video
+        class="media-frame media-video"
+        muted
+        playsinline
+        preload="metadata"
+        aria-label={art.data.alt ?? art.data.title}
+      >
+        <source src={mediaSrc} type="video/mp4" />
+      </video>
+    ) : mediaSrc ? (
+      <img
+        class="media-frame media-image"
+        src={mediaSrc}
+        alt={art.data.alt ?? art.data.title}
+      />
+    ) : (
+      <div
+        class="card-placeholder"
+        role="img"
+        aria-label={art.data.alt ?? art.data.title}
+        style={`aspect-ratio: ${art.data.aspectRatio}; background: ${art.data.placeholder};`}
+      >
+        <span>{art.data.title}</span>
+      </div>
+    )}
+
+    <div class="card-meta">
+      <h3>{art.data.title}</h3>
+      <p>{art.data.medium}</p>
+      <small>{art.data.dimensions}</small>
+    </div>
+
+    <div class="right">
+      <small>{art.data.year}</small>
+      <small>{art.data.category}</small>
+    </div>
+  </a>
+</article>

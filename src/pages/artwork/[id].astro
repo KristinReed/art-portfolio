@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const artworks = await getCollection('artwork');
+
+  return artworks.map((art, index) => ({
+    params: { id: art.id },
+    props: {
+      art,
+      prev: artworks[(index - 1 + artworks.length) % artworks.length],
+      next: artworks[(index + 1) % artworks.length],
+    },
+  }));
+}
+
+const { art, prev, next } = Astro.props;
+const mediaType = art.data.mediaType ?? 'placeholder';
+const mediaSrc = art.data.src;
+---
+
+<BaseLayout title={art.data.title} description={art.data.description}>
+  <section class="detail">
+    <a class="back" href="/#work">Back to portfolio</a>
+
+    <div class="detail-grid">
+      {mediaType === 'video' && mediaSrc ? (
+        <video class="media-frame detail-media" controls playsinline preload="metadata">
+          <source src={mediaSrc} type="video/mp4" />
+        </video>
+      ) : mediaSrc ? (
+        <img class="media-frame detail-media" src={mediaSrc} alt={art.data.alt ?? art.data.title} />
+      ) : (
+        <div
+          class="art-placeholder detail-image"
+          role="img"
+          aria-label={art.data.alt ?? art.data.title}
+          style={`aspect-ratio: ${art.data.aspectRatio}; background: ${art.data.placeholder};`}
+        >
+          <span>{art.data.title}</span>
+        </div>
+      )}
+
+      <div class="detail-copy">
+        <h1>{art.data.title}</h1>
+        <p>{art.data.description}</p>
+
+        <ul>
+          <li>{art.data.medium}</li>
+          <li>{art.data.dimensions}</li>
+          <li>{art.data.year}</li>
+        </ul>
+      </div>
+    </div>
+
+    <nav class="detail-nav">
+      <a href={prev ? `/artwork/${prev.id}/` : '/#work'}>Previous</a>
+      <a href={next ? `/artwork/${next.id}/` : '/#work'}>Next</a>
+    </nav>
+  </section>
+</BaseLayout>

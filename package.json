@@ -1,7 +1,7 @@
 {
-  "name": "",
+  "name": "art-portfolio",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "node": ">=22.23.4"
   },
@@ -13,5 +13,9 @@
   },
   "dependencies": {
     "astro": "^7.4.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.8.3"
   }
 }
