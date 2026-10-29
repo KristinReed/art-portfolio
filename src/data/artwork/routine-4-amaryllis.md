@@ -7,7 +7,7 @@ category: "Paintings"
 description: "A bold still life of a single amaryllis bloom, built through saturated color and a sense of deliberate ceremony."
 alt: "Acrylic painting of an amaryllis flower with rich color and dramatic form"
 featured: false
-landscape: true
+landscapeCard: true
 mediaType: "image"
 src: "/artwork/Routine_4_(Amarylis).png"
 placeholder: "linear-gradient(135deg, #d7d1c7, #efe9e1)"

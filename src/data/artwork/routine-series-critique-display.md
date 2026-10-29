@@ -6,8 +6,8 @@ dimensions: "Installation view"
 category: "Paintings"
 description: "An installation view of the four paintings in the Routine series, displayed together during a university art critique."
 alt: "Four colorful Routine series paintings displayed together on a white gallery wall"
-featured: true
-landscape: true
+featured: false
+landscapeCard: true
 mediaType: "image"
 src: "/artwork/Routine_2026.jpeg"
 placeholder: "linear-gradient(135deg, #d9d5d2, #f4efe7)"

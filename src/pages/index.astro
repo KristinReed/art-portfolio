@@ -4,8 +4,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ArtWorkCard from '../components/ArtWorkCard.astro';
 
 const artwork = (await getCollection('artwork')).sort((a, b) => b.data.year - a.data.year);
-const curated = artwork.find((art) => art.data.category === 'Curatorial') ?? artwork[0];
-const categories : any[] = [...new Set(artwork.map((art) => art.data.category))];
+const exhibiting = artwork.filter((art) => art.data.featured);
+const portfolio = artwork.filter((art) => art.data.category !== 'Curatorial');
+const categories = [...new Set(portfolio.map((art) => art.data.category))];
 ---
 
 <BaseLayout description="Selected artwork and portfolio">
@@ -13,48 +14,60 @@ const categories : any[] = [...new Set(artwork.map((art) => art.data.category))]
     <p class="eyebrow">Artist — Victoria, BC</p>
     <h1>Art made from<br />quiet observations.</h1>
     <p class="intro-copy">
-      Paintings, photography, sketches, digital art, and curated exhibitions shaped by a sense of place.
+      Paintings, photography, sketches, and digital art shaped by a sense of place.
     </p>
     <a class="text-link" href="#work">View selected work</a>
   </section>
 
-  {
-    curated && (
-      <section class="exhibition">
-        <div class="section-heading">
-          <p class="eyebrow">Curatorial</p>
-          <h2>Selected exhibition</h2>
-        </div>
+  <section class="exhibition">
+    <div class="section-heading">
+      <p class="eyebrow">Featured</p>
+      <h2>Currently on exhibition</h2>
+    </div>
 
-        <div class="exhibition-panel">
-          {curated.data.mediaType === 'image' && curated.data.src ? (
-            <img
-              class:list={[
-                "mini-art",
-                curated.data.landscapeCard && "media-image-landscape"
-              ]}
-              src={curated.data.src}
-              alt={curated.data.alt ?? curated.data.title}
-            />
-          ) : (
-            <div
-              class="mini-art"
-              role="img"
-              aria-label={curated.data.alt ?? curated.data.title}
-              style={`background: ${curated.data.placeholder};`}
-            />
-          )}
-          <div class="exhibition-copy">
-            <h3>{curated.data.title}</h3>
-            <p>
-              A gathering of work exploring memory, atmosphere, and the textures of everyday life.
-            </p>
-            <a class="text-link" href={`/artwork/${curated.id}/`}>Explore the piece</a>
-          </div>
-        </div>
-      </section>
-    )
-  }
+    {exhibiting.length > 0 ? (
+      <div class="exhibition-list">
+        {exhibiting.map((art) => (
+          <article class="exhibition-panel">
+            <a class="exhibition-art-link" href={`/artwork/${art.id}/`} aria-label={`View ${art.data.title}`}>
+              {art.data.mediaType === 'video' && art.data.src ? (
+                <video class="exhibition-art" muted playsinline preload="metadata" aria-label={art.data.alt}>
+                  <source src={art.data.src} type="video/mp4" />
+                </video>
+              ) : art.data.mediaType === 'image' && art.data.src ? (
+                <img
+                  class="exhibition-art"
+                  src={art.data.src}
+                  alt={art.data.alt}
+                />
+              ) : (
+                <div
+                  class="exhibition-art exhibition-placeholder"
+                  role="img"
+                  aria-label={art.data.alt}
+                  style={`background: ${art.data.placeholder};`}
+                >
+                  <span>{art.data.title}</span>
+                </div>
+              )}
+            </a>
+            <div class="exhibition-copy">
+              <p class="eyebrow">{art.data.exhibitionName}</p>
+              <h3>{art.data.title}</h3>
+              <p>{art.data.description}</p>
+              <p class="exhibition-details">
+                <span>{art.data.exhibitionLocation}</span>
+                <span>{art.data.exhibitionDates}</span>
+              </p>
+              <a class="text-link" href={`/artwork/${art.id}/`}>View artwork</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">There are no works currently on exhibition.</p>
+    )}
+  </section>
 
   <section id="work" class="gallery">
     <div class="section-heading">
@@ -67,7 +80,7 @@ const categories : any[] = [...new Set(artwork.map((art) => art.data.category))]
     </div>
 
     <div class="grid">
-      {artwork.map((art) => <ArtWorkCard art={art} />)}
+      {portfolio.map((art) => <ArtWorkCard art={art} />)}
     </div>
   </section>
 </BaseLayout>

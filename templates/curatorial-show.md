@@ -9,7 +9,6 @@ alt: "Curatorial exhibition installation featuring quiet domestic scenes"
 featured: false
 mediaType: "video"
 src: "/artwork/curatorial-show.mp4"
-aspectRatio: "4 / 5"
 placeholder: "linear-gradient(135deg, #d6c7b7, #f1ece7)"
 ---
 

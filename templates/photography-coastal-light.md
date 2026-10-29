@@ -8,8 +8,6 @@ description: "A luminous coastal frame shaped by weather, movement, and quiet ho
 alt: "Photograph of a coast at dusk with soft light and layered blue tones"
 featured: false
 mediaType: "placeholder"
-src: ""
-aspectRatio: "4 / 5"
 placeholder: "linear-gradient(135deg, #9bb2c0, #dde8ed)"
 ---
 

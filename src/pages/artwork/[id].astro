@@ -26,18 +26,32 @@ const mediaSrc = art.data.src;
 
     <div class="detail-grid">
       {mediaType === 'video' && mediaSrc ? (
-        <video class="media-frame detail-media" controls playsinline preload="metadata">
+        <video
+          class:list={[
+            'media-frame detail-media',
+            art.data.landscapeCard && 'media-image-landscape'
+          ]}
+          controls
+          playsinline
+          preload="metadata"
+        >
           <source src={mediaSrc} type="video/mp4" />
         </video>
       ) : mediaSrc ? (
         <img
-          class="media-frame detail-media"
+          class:list={[
+            'media-frame detail-media',
+            art.data.landscapeCard && 'media-image-landscape'
+          ]}
           src={mediaSrc}
           alt={art.data.alt ?? art.data.title}
         />
       ) : (
         <div
-          class="art-placeholder detail-image"
+          class:list={[
+            'art-placeholder detail-image',
+            art.data.landscapeCard && 'media-image-landscape'
+          ]}
           role="img"
           aria-label={art.data.alt ?? art.data.title}
           style={`background: ${art.data.placeholder};`}
@@ -54,6 +68,13 @@ const mediaSrc = art.data.src;
           <li>{art.data.medium}</li>
           <li>{art.data.dimensions}</li>
           <li>{art.data.year}</li>
+          {art.data.featured && (
+            <>
+              <li>Exhibition: {art.data.exhibitionName}</li>
+              <li>On exhibition at {art.data.exhibitionLocation}</li>
+              <li>{art.data.exhibitionDates}</li>
+            </>
+          )}
         </ul>
       </div>
     </div>

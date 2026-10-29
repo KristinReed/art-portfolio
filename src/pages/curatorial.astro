@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import ArtWorkCard from '../components/ArtWorkCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const curatorial = (await getCollection('artwork'))
+  .filter((art) => art.data.category === 'Curatorial')
+  .sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout title="Curatorial" description="Exhibition arrangements and installation views by Shayna Reed">
+  <section class="gallery">
+    <div class="section-heading">
+      <p class="eyebrow">Curatorial</p>
+      <h1>Exhibition arrangements</h1>
+      <p class="section-description">
+        Installation views and images of exhibitions arranged by the artist.
+      </p>
+    </div>
+
+    {curatorial.length > 0 ? (
+      <div class="grid">
+        {curatorial.map((art) => <ArtWorkCard art={art} />)}
+      </div>
+    ) : (
+      <p class="empty-state">There are no curatorial projects to show yet.</p>
+    )}
+  </section>
+</BaseLayout>
