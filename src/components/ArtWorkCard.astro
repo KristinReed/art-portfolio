@@ -18,17 +18,19 @@ const mediaSrc = art.data.src;
       </video>
     ) : mediaSrc ? (
       <img
-        class="media-frame media-image"
+        class:list={[
+          'media-frame media-image',
+          art.data.landscapeCard && 'media-image-landscape'
+        ]}
         src={mediaSrc}
         alt={art.data.alt ?? art.data.title}
-        style={`aspect-ratio: ${art.data.aspectRatio};`}
       />
     ) : (
       <div
         class="card-placeholder"
         role="img"
         aria-label={art.data.alt ?? art.data.title}
-        style={`aspect-ratio: ${art.data.aspectRatio}; background: ${art.data.placeholder};`}
+        style={`background: ${art.data.placeholder};`}
       >
         <span>{art.data.title}</span>
       </div>

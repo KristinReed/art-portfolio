@@ -7,9 +7,9 @@ category: "Paintings"
 description: "A stylized botanical composition built from vivid color, sculptural form, and a feeling of everyday ceremony."
 alt: "Acrylic painting of a Bird of Paradise floral arrangement with layered color and texture"
 featured: false
+landscape: true
 mediaType: "image"
 src: "/artwork/Routine_2_(Bird_of_Paradise).png"
-aspectRatio: "3 / 4"
 placeholder: "linear-gradient(135deg, #d7d1c7, #efe9e1)"
 ---
 

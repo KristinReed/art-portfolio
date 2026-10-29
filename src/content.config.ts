@@ -13,9 +13,9 @@ const artworkCollection = defineCollection({
     description: z.string(),
     alt: z.string().default('Artwork'),
     featured: z.boolean().default(false),
+    landscapeCard: z.boolean().default(false),
     mediaType: z.enum(['image', 'video', 'placeholder']).default('placeholder'),
     src: z.string().optional(),
-    aspectRatio: z.string().default('4 / 5'),
     placeholder: z.string().default('linear-gradient(135deg,#e7e5e4,#fafaf9)'),
   }),
 });

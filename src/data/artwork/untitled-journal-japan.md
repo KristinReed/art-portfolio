@@ -9,7 +9,6 @@ alt: "Colorful acrylic painting of hands and assorted foods, flowers, and keepsa
 featured: false
 mediaType: "image"
 src: "/artwork/Untitled_(Journal_Japan)_2026.jpeg"
-aspectRatio: "3 / 4"
 placeholder: "linear-gradient(135deg, #d9d5d2, #f4efe7)"
 ---
 

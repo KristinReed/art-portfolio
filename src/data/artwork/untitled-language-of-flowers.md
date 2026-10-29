@@ -7,9 +7,9 @@ category: "Paintings"
 description: "A bouquet of varied blooms and expressive lettering fills a vivid purple field, bringing floral symbolism and language together."
 alt: "Acrylic painting of a colorful bouquet beside the words The Language of Flowers on a purple background"
 featured: false
+landscape: true
 mediaType: "image"
 src: "/artwork/Untitled_(The%20Language%20of%20Flowers)_2025.png"
-aspectRatio: "9 / 8"
 placeholder: "linear-gradient(135deg, #d9d5d2, #f4efe7)"
 ---
 

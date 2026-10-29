@@ -9,7 +9,6 @@ alt: "Acrylic painting of chamomile-like flowers with warm color and layered tex
 featured: false
 mediaType: "image"
 src: "/artwork/Routine_3_(Chamomile).png"
-aspectRatio: "3 / 4"
 placeholder: "linear-gradient(135deg, #d7d1c7, #efe9e1)"
 ---
 

@@ -9,7 +9,6 @@ alt: "Acrylic painting of collected objects, notes, and yellow tulips arranged o
 featured: false
 mediaType: "image"
 src: "/artwork/Cherished_2024.png"
-aspectRatio: "4 / 5"
 placeholder: "linear-gradient(135deg, #d9d5d2, #f4efe7)"
 ---
 

@@ -9,7 +9,6 @@ alt: "Acrylic painting of a burdock-inspired floral arrangement in a warm studio
 featured: false
 mediaType: "image"
 src: "/artwork/Routine_1_(Burdock).png"
-aspectRatio: "3 / 4"
 placeholder: "linear-gradient(135deg, #d7d1c7, #efe9e1)"
 ---
 

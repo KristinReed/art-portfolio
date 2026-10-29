@@ -4,9 +4,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ArtWorkCard from '../components/ArtWorkCard.astro';
 
 const artwork = (await getCollection('artwork')).sort((a, b) => b.data.year - a.data.year);
-const featured = artwork.find((art) => art.data.featured) ?? artwork[0];
 const curated = artwork.find((art) => art.data.category === 'Curatorial') ?? artwork[0];
-const categories = [...new Set(artwork.map((art) => art.data.category))];
+const categories : any[] = [...new Set(artwork.map((art) => art.data.category))];
 ---
 
 <BaseLayout description="Selected artwork and portfolio">
@@ -20,32 +19,6 @@ const categories = [...new Set(artwork.map((art) => art.data.category))];
   </section>
 
   {
-    featured && (
-      <section class="hero">
-        <a href={`/artwork/${featured.id}/`}>
-          {featured.data.mediaType === 'image' && featured.data.src ? (
-            <img
-              class="hero-image hero-media"
-              src={featured.data.src}
-              alt={featured.data.alt ?? featured.data.title}
-              style={`aspect-ratio: ${featured.data.aspectRatio};`}
-            />
-          ) : (
-            <div
-              class="art-placeholder hero-image"
-              role="img"
-              aria-label={featured.data.alt ?? featured.data.title}
-              style={`background: ${featured.data.placeholder};`}
-            >
-              <span>{featured.data.title}</span>
-            </div>
-          )}
-        </a>
-      </section>
-    )
-  }
-
-  {
     curated && (
       <section class="exhibition">
         <div class="section-heading">
@@ -54,12 +27,23 @@ const categories = [...new Set(artwork.map((art) => art.data.category))];
         </div>
 
         <div class="exhibition-panel">
-          <div
-            class="mini-art"
-            role="img"
-            aria-label={curated.data.alt ?? curated.data.title}
-            style={`background: ${curated.data.placeholder};`}
-          />
+          {curated.data.mediaType === 'image' && curated.data.src ? (
+            <img
+              class:list={[
+                "mini-art",
+                curated.data.landscapeCard && "media-image-landscape"
+              ]}
+              src={curated.data.src}
+              alt={curated.data.alt ?? curated.data.title}
+            />
+          ) : (
+            <div
+              class="mini-art"
+              role="img"
+              aria-label={curated.data.alt ?? curated.data.title}
+              style={`background: ${curated.data.placeholder};`}
+            />
+          )}
           <div class="exhibition-copy">
             <h3>{curated.data.title}</h3>
             <p>

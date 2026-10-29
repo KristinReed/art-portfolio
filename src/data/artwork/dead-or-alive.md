@@ -9,7 +9,6 @@ alt: "Acrylic painting of a suited figure holding a goldfish in a glass bowl bes
 featured: false
 mediaType: "image"
 src: "/artwork/Dead_or_Alive__2025.png"
-aspectRatio: "4 / 5"
 placeholder: "linear-gradient(135deg, #d9d5d2, #f4efe7)"
 ---
 

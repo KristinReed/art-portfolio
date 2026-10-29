@@ -34,14 +34,13 @@ const mediaSrc = art.data.src;
           class="media-frame detail-media"
           src={mediaSrc}
           alt={art.data.alt ?? art.data.title}
-          style={`aspect-ratio: ${art.data.aspectRatio};`}
         />
       ) : (
         <div
           class="art-placeholder detail-image"
           role="img"
           aria-label={art.data.alt ?? art.data.title}
-          style={`aspect-ratio: ${art.data.aspectRatio}; background: ${art.data.placeholder};`}
+          style={`background: ${art.data.placeholder};`}
         >
           <span>{art.data.title}</span>
         </div>
