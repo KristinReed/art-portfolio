@@ -1,5 +1,5 @@
 ---
-title: "Where Memories Dwell 4"
+title: "Where Memories Dwell #4"
 year: 2026
 medium: "Black & white photograph on dibond"
 dimensions: "15 x 22 in"
@@ -9,7 +9,8 @@ alt: "Black and white photograph of a room with dramatic shadow and atmospheric 
 featured: true
 exhibitionName: "What Remains"
 exhibitionLocation: "Visual Arts Building, University of Victoria"
-exhibitionDates: "October 25 – November 7, 2026"
+exhibitionDates: "October 25, 2026 – November 7, 2026"
+currentWork: true
 landscapeCard: true
 mediaType: "image"
 src: "/artwork/Where_Memories_Dwell_4_2026.jpeg"

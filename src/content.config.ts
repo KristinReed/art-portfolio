@@ -14,6 +14,7 @@ const artworkCollection = defineCollection({
       description: z.string(),
       alt: z.string().default('Artwork'),
       featured: z.boolean().default(false),
+      currentWork: z.boolean().default(false),
       exhibitionName: z.string().optional(),
       exhibitionLocation: z.string().optional(),
       exhibitionDates: z.string().optional(),

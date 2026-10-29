@@ -1,6 +1,6 @@
 # Artist portfolio
 
-A static artist portfolio built with Astro. Artwork pages and the selected-work gallery are generated from Markdown content files.
+A static artist portfolio built with Astro. Artwork pages and the portfolio gallery are generated from Markdown content files.
 
 ## Requirements
 
@@ -36,7 +36,7 @@ src/
   components/          Reusable Astro components, including artwork cards
   data/artwork/        Markdown files containing artwork content
   layouts/             Shared page layouts
-  pages/               Landing, Curatorial, About, Contact, and artwork detail pages
+  pages/               Landing, Portfolio, Curatorial, About, Contact, and artwork detail pages
   styles/              Global styles
   content.config.ts    Artwork collection schema
 ARTWORK_GUIDE.md       Artwork content and media authoring guide
@@ -46,4 +46,4 @@ ARTWORK_GUIDE.md       Artwork content and media authoring guide
 
 Add artwork as Markdown files in `src/data/artwork/` and media files in `public/artwork/`. The artwork collection schema and frontmatter examples are documented in [ARTWORK_GUIDE.md](./ARTWORK_GUIDE.md).
 
-The [Curatorial page](./src/pages/curatorial.astro) presents exhibition-arrangement images and installation views separately from the artist's portfolio. The landing page lists works currently on exhibition with their name, location, and dates; it shows an empty message when there are no active shows. Artwork cards are ordered by year, newest first.
+The [Portfolio page](./src/pages/portfolio.astro) presents artwork separately from the [Curatorial page](./src/pages/curatorial.astro), which features exhibition-arrangement images and installation views. The landing page lists works currently on exhibition with their name, location, and dates, and has a separate section for work in progress; both sections show an empty message when there are no matching entries. Artwork cards are ordered by year, newest first.

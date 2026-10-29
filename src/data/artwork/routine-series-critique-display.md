@@ -1,5 +1,5 @@
 ---
-title: "Routine 1–4 — University Critique Display"
+title: "Routine #1–4 — University Critique Display"
 year: 2026
 medium: "Acrylic on canvas — series display"
 dimensions: "Installation view"

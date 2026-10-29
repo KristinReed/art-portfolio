@@ -22,7 +22,7 @@ const mediaSrc = art.data.src;
 
 <BaseLayout title={art.data.title} description={art.data.description}>
   <section class="detail">
-    <a class="back" href="/#work">Back to portfolio</a>
+    <a class="back" href="/portfolio">Back to portfolio</a>
 
     <div class="detail-grid">
       {mediaType === 'video' && mediaSrc ? (
@@ -80,8 +80,8 @@ const mediaSrc = art.data.src;
     </div>
 
     <nav class="detail-nav">
-      <a href={prev ? `/artwork/${prev.id}/` : '/#work'}>Previous</a>
-      <a href={next ? `/artwork/${next.id}/` : '/#work'}>Next</a>
+      <a href={prev ? `/artwork/${prev.id}/` : '/portfolio'}>Previous</a>
+      <a href={next ? `/artwork/${next.id}/` : '/portfolio'}>Next</a>
     </nav>
   </section>
 </BaseLayout>

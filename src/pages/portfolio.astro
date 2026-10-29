@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import ArtWorkCard from '../components/ArtWorkCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const portfolio = (await getCollection('artwork'))
+  .filter((art) => art.data.category !== 'Curatorial')
+  .sort((a, b) => b.data.year - a.data.year);
+const categories = [...new Set(portfolio.map((art) => art.data.category))];
+---
+
+<BaseLayout title="Portfolio" description="Selected paintings, photography, sketches, and digital artwork by Shayna Reed">
+  <section class="gallery">
+    <div class="section-heading">
+      <p class="eyebrow">Portfolio</p>
+      <h1>Selected work</h1>
+    </div>
+
+    <div class="categories">
+      {categories.map((category) => <span class="tag">{category}</span>)}
+    </div>
+
+    <div class="grid">
+      {portfolio.map((art) => <ArtWorkCard art={art} />)}
+    </div>
+  </section>
+</BaseLayout>
