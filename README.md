@@ -36,7 +36,7 @@ src/
   components/          Reusable Astro components, including artwork cards
   data/artwork/        Markdown files containing artwork content
   layouts/             Shared page layouts
-  pages/               Landing, Portfolio, Curatorial, About, Contact, and artwork detail pages
+  pages/               Landing, Portfolio, Curatorial, Contact, and artwork detail pages
   styles/              Global styles
   content.config.ts    Artwork collection schema
 ARTWORK_GUIDE.md       Artwork content and media authoring guide
