@@ -8,8 +8,6 @@ description: "Layered textures and digital gestures exploring repetition, memory
 alt: "Digital artwork with layered color blocks and soft texture"
 featured: false
 mediaType: "placeholder"
-src: ""
-aspectRatio: "4 / 5"
 placeholder: "linear-gradient(135deg, #c7b8d8, #efeaf7)"
 ---
 

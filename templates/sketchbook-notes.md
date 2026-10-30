@@ -8,8 +8,6 @@ description: "Loose observational drawings that capture motion, gesture, and the
 alt: "Ink and graphite sketchbook pages with gestural marks and linework"
 featured: false
 mediaType: "placeholder"
-src: ""
-aspectRatio: "4 / 5"
 placeholder: "linear-gradient(135deg, #d7d0c6, #f2efe9)"
 ---
 
