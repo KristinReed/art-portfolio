@@ -1,11 +1,12 @@
 ---
-const { art } = Astro.props;
+const { art, returnTo = '/portfolio' } = Astro.props;
 const mediaType = art.data.mediaType ?? 'placeholder';
 const mediaSrc = art.data.src;
+const detailHref = `/artwork/${art.id}/?returnTo=${encodeURIComponent(returnTo)}`;
 ---
 
-<article class="card">
-  <a href={`/artwork/${art.id}`} aria-label={`View ${art.data.title}`}>
+<article class="card" data-artwork-category={art.data.category}>
+  <a href={detailHref} aria-label={`View ${art.data.title}`}>
     {mediaType === 'video' && mediaSrc ? (
       <video
         class="media-frame media-video"

@@ -20,7 +20,7 @@ const curatorial = (await getCollection('artwork'))
 
     {curatorial.length > 0 ? (
       <div class="grid">
-        {curatorial.map((art) => <ArtWorkCard art={art} />)}
+        {curatorial.map((art) => <ArtWorkCard art={art} returnTo="/curatorial" />)}
       </div>
     ) : (
       <p class="empty-state">There are no curatorial projects to show yet.</p>

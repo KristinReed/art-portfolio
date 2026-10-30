@@ -8,7 +8,7 @@ description: "A final study in the series, framed by quiet interior light and th
 alt: "Black and white photograph of a room with dramatic shadow and atmospheric emptiness"
 featured: true
 exhibitionName: "What Remains"
-exhibitionLocation: "Visual Arts Building, University of Victoria"
+exhibitionLocation: "Mezzanine, Visual Arts Building, University of Victoria"
 exhibitionDates: "October 25, 2026 – November 7, 2026"
 currentWork: true
 landscapeCard: true

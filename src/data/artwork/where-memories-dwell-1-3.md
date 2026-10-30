@@ -6,7 +6,10 @@ dimensions: "15 x 22 in"
 category: "Photography"
 description: "A contemplative black-and-white study of structure, memory, and the residual traces of place."
 alt: "Black and white photo of an abandoned building interior and weathered architectural surfaces"
-featured: false
+featured: true
+exhibitionName: "The Observatory"
+exhibitionLocation: "Room B102 Visual Arts Building, University of Victoria"
+exhibitionDates: "March 19, 2026 – March 25, 2026"
 landscapeCard: true
 mediaType: "image"
 src: "/artwork/Where_Memories_Dwell_1-3_2025.jpg"

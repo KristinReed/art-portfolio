@@ -17,7 +17,11 @@ const categories = [...new Set(portfolio.map((art) => art.data.category))];
     </div>
 
     <div class="categories">
-      {categories.map((category) => <span class="tag">{category}</span>)}
+      {categories.map((category) => (
+        <button class="tag" type="button" data-category-filter={category} aria-pressed="false">
+          {category}
+        </button>
+      ))}
     </div>
 
     <div class="grid">
@@ -25,3 +29,27 @@ const categories = [...new Set(portfolio.map((art) => art.data.category))];
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-category-filter]');
+  const artworkCards = document.querySelectorAll<HTMLElement>('[data-artwork-category]');
+  let selectedCategory: string | null = null;
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const category = button.dataset.categoryFilter;
+      selectedCategory = selectedCategory === category ? null : category ?? null;
+
+      filterButtons.forEach((filterButton) => {
+        filterButton.setAttribute(
+          'aria-pressed',
+          String(filterButton.dataset.categoryFilter === selectedCategory),
+        );
+      });
+
+      artworkCards.forEach((card) => {
+        card.hidden = selectedCategory !== null && card.dataset.artworkCategory !== selectedCategory;
+      });
+    });
+  });
+</script>

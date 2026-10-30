@@ -22,7 +22,7 @@ const mediaSrc = art.data.src;
 
 <BaseLayout title={art.data.title} description={art.data.description}>
   <section class="detail">
-    <a class="back" href="/portfolio">Back to portfolio</a>
+    <a class="back" href="/portfolio" data-detail-back>Back to portfolio</a>
 
     <div class="detail-grid">
       {mediaType === 'video' && mediaSrc ? (
@@ -80,8 +80,28 @@ const mediaSrc = art.data.src;
     </div>
 
     <nav class="detail-nav">
-      <a href={prev ? `/artwork/${prev.id}/` : '/portfolio'}>Previous</a>
-      <a href={next ? `/artwork/${next.id}/` : '/portfolio'}>Next</a>
+      <a href={prev ? `/artwork/${prev.id}/` : '/portfolio'} data-detail-navigation>Previous</a>
+      <a href={next ? `/artwork/${next.id}/` : '/portfolio'} data-detail-navigation>Next</a>
     </nav>
   </section>
 </BaseLayout>
+
+<script>
+  const returnToOptions = new Set(['/', '/portfolio', '/curatorial']);
+  const requestedReturnTo = new URLSearchParams(window.location.search).get('returnTo');
+  const returnTo = requestedReturnTo && returnToOptions.has(requestedReturnTo)
+    ? requestedReturnTo
+    : '/portfolio';
+  const backLink = document.querySelector<HTMLAnchorElement>('[data-detail-back]');
+
+  if (backLink) {
+    backLink.href = returnTo;
+    backLink.textContent = returnTo === '/' ? 'Back to home' : returnTo === '/curatorial' ? 'Back to curatorial' : 'Back to portfolio';
+  }
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-detail-navigation]').forEach((link) => {
+    const url = new URL(link.href);
+    url.searchParams.set('returnTo', returnTo);
+    link.href = url.toString();
+  });
+</script>
