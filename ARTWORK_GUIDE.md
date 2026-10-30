@@ -85,8 +85,8 @@ Gallery cards and artwork detail media use a 4:5 portrait ratio by default and a
 
 ## Where entries appear
 
-- Artwork entries appear on the dedicated [Portfolio page](./src/pages/portfolio.astro), sorted newest first. Curatorial entries are excluded from this gallery.
+- Artwork entries appear on the dedicated [Portfolio page](./src/pages/portfolio.astro), sorted newest first, except entries marked `currentWork: true`; those appear in the homepage’s Current work section instead. Curatorial entries are also excluded from the Portfolio gallery.
 - Artwork marked `featured: true` also appears in the homepage’s “Currently on exhibition” section with the exhibition name, location, and dates. If there are no active shows, the section displays an empty message.
-- Artwork marked `currentWork: true` appears in the homepage’s “Current work” section, after current exhibitions. Multiple entries can be marked current; the section displays an empty message when none are marked.
+- Artwork marked `currentWork: true` appears in the homepage’s “Current work” section, after current exhibitions, and is omitted from the Portfolio gallery to keep the groups separate. Multiple entries can be marked current; the section displays an empty message when none are marked.
 - Curatorial entries appear on the dedicated Curatorial page, sorted newest first. If there are no curatorial entries, that page displays an empty message.
 - Every entry has a detail page at `/artwork/<filename>/`, where `<filename>` is the Markdown filename without its `.md` extension.

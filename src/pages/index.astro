@@ -147,9 +147,6 @@ const currentWork = artwork.filter((art) => art.data.currentWork && art.data.cat
     if (slides.length < 2) return;
 
     let activeIndex = 0;
-    let paused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let hovered = false;
-    let focused = false;
     let timer: number | undefined;
 
     const updateSlides = () => {
@@ -172,11 +169,11 @@ const currentWork = artwork.filter((art) => art.data.currentWork && art.data.cat
 
     const startTimer = () => {
       stopTimer();
-      if (!paused && !hovered && !focused && !document.hidden) {
+      if (!document.hidden) {
         timer = window.setInterval(() => {
           activeIndex = (activeIndex + 1) % slides.length;
           updateSlides();
-        }, 10_000);
+        }, 5_000);
       }
     };
 
@@ -193,24 +190,6 @@ const currentWork = artwork.filter((art) => art.data.currentWork && art.data.cat
       });
     });
 
-    carousel.addEventListener('pointerenter', () => {
-      hovered = true;
-      startTimer();
-    });
-    carousel.addEventListener('pointerleave', () => {
-      hovered = false;
-      startTimer();
-    });
-    carousel.addEventListener('focusin', () => {
-      focused = true;
-      startTimer();
-    });
-    carousel.addEventListener('focusout', () => {
-      window.setTimeout(() => {
-        focused = carousel.contains(document.activeElement);
-        startTimer();
-      });
-    });
     document.addEventListener('visibilitychange', startTimer);
     updateSlides();
     startTimer();

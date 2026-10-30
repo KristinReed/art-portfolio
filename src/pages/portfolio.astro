@@ -4,7 +4,7 @@ import ArtWorkCard from '../components/ArtWorkCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const portfolio = (await getCollection('artwork'))
-  .filter((art) => art.data.category !== 'Curatorial')
+  .filter((art) => art.data.category !== 'Curatorial' && !art.data.currentWork)
   .sort((a, b) => b.data.year - a.data.year);
 const categories = [...new Set(portfolio.map((art) => art.data.category))];
 ---
@@ -24,9 +24,13 @@ const categories = [...new Set(portfolio.map((art) => art.data.category))];
       ))}
     </div>
 
-    <div class="grid">
-      {portfolio.map((art) => <ArtWorkCard art={art} />)}
-    </div>
+    {portfolio.length > 0 ? (
+      <div class="grid">
+        {portfolio.map((art) => <ArtWorkCard art={art} />)}
+      </div>
+    ) : (
+      <p class="empty-state">There are no selected works to display right now.</p>
+    )}
   </section>
 </BaseLayout>
 
