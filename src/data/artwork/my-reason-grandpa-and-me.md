@@ -1,5 +1,5 @@
 ---
-title: "My Reason (Grandpa & I)"
+title: "My Reason (Grandpa & me)"
 year: 2024
 medium: "Rubber block print and ink on paper"
 dimensions: "4 x 6 in"
@@ -9,7 +9,7 @@ alt: "Black ink rubber block print with bold carved figures and graphic linework
 featured: false
 landscapeCard: true
 mediaType: "image"
-src: "/artwork/My_Reason_(Grandpa_and_I)_2024.png"
+src: "/artwork/My_Reason_(Grandpa_and_me)_2024.png"
 placeholder: "linear-gradient(135deg, #e8dfcc, #faf6ea)"
 ---
 
