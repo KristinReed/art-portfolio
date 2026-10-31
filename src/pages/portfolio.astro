@@ -3,17 +3,26 @@ import { getCollection } from 'astro:content';
 import ArtWorkCard from '../components/ArtWorkCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+// Keep all non-curatorial artwork in the portfolio and group named series separately.
 const portfolio = (await getCollection('artwork'))
-  .filter((art) => art.data.category !== 'Curatorial' && !art.data.currentWork)
+  .filter((art) => art.data.category !== 'Curatorial')
   .sort((a, b) => b.data.year - a.data.year);
 const categories = [...new Set(portfolio.map((art) => art.data.category))];
+const seriesGroups = [
+  ...new Set(portfolio.map((art) => art.data.seriesName?.trim()).filter((name) => name)),
+].map((seriesName) => ({
+  seriesName,
+  artworks: portfolio.filter((art) => art.data.seriesName?.trim() === seriesName),
+}));
+const selectedWork = portfolio.filter((art) => !art.data.seriesName?.trim());
 ---
 
 <BaseLayout title="Portfolio" description="Selected paintings, photography, sketches, and digital artwork by Shayna Reed">
   <section class="gallery">
+    <!-- Category filters apply across both series groups and standalone work. -->
     <div class="section-heading">
-      <p class="eyebrow">Portfolio</p>
-      <h1>Selected work</h1>
+      <p class="eyebrow">Selected artwork</p>
+      <h1>Portfolio</h1>
     </div>
 
     <div class="categories">
@@ -25,9 +34,25 @@ const categories = [...new Set(portfolio.map((art) => art.data.category))];
     </div>
 
     {portfolio.length > 0 ? (
-      <div class="grid">
-        {portfolio.map((art) => <ArtWorkCard art={art} />)}
-      </div>
+      <>
+        {seriesGroups.map(({ seriesName, artworks }) => (
+          <section class="portfolio-group" data-series-group>
+            <h2>{seriesName}</h2>
+            <div class="grid">
+              {artworks.map((art) => <ArtWorkCard art={art} />)}
+            </div>
+          </section>
+        ))}
+
+        {selectedWork.length > 0 && (
+          <section class="portfolio-group" data-selected-work-section>
+            <h2>Standalone work</h2>
+            <div class="grid">
+              {selectedWork.map((art) => <ArtWorkCard art={art} />)}
+            </div>
+          </section>
+        )}
+      </>
     ) : (
       <p class="empty-state">There are no selected works to display right now.</p>
     )}
@@ -35,9 +60,24 @@ const categories = [...new Set(portfolio.map((art) => art.data.category))];
 </BaseLayout>
 
 <script>
+  // Filter cards by category, then hide any group with no remaining visible cards.
   const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-category-filter]');
   const artworkCards = document.querySelectorAll<HTMLElement>('[data-artwork-category]');
+  const portfolioGroups = document.querySelectorAll<HTMLElement>(
+    '[data-series-group], [data-selected-work-section]',
+  );
   let selectedCategory: string | null = null;
+
+  const applyCategoryFilter = () => {
+    artworkCards.forEach((card) => {
+      card.hidden = selectedCategory !== null && card.dataset.artworkCategory !== selectedCategory;
+    });
+
+    portfolioGroups.forEach((group) => {
+      group.hidden = !Array.from(group.querySelectorAll<HTMLElement>('[data-artwork-category]'))
+        .some((card) => !card.hidden);
+    });
+  };
 
   filterButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -51,9 +91,7 @@ const categories = [...new Set(portfolio.map((art) => art.data.category))];
         );
       });
 
-      artworkCards.forEach((card) => {
-        card.hidden = selectedCategory !== null && card.dataset.artworkCategory !== selectedCategory;
-      });
+      applyCategoryFilter();
     });
   });
 </script>

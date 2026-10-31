@@ -10,8 +10,8 @@ featured: true
 exhibitionName: "What Remains"
 exhibitionLocation: "Mezzanine, Visual Arts Building, University of Victoria"
 exhibitionDates: "October 25, 2026 – November 7, 2026"
-currentWork: true
 landscapeCard: true
+seriesName: "Where Memories Dwell"
 mediaType: "image"
 src: "/artwork/Where_Memories_Dwell_4_2026.jpeg"
 placeholder: "linear-gradient(135deg, #d5d5d5, #f1f1f1)"

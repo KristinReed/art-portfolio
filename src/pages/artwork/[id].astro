@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
+// Generate one static detail route per artwork and provide its neighbors for browsing.
 export async function getStaticPaths() {
   const artworks = await getCollection('artwork');
 
@@ -22,6 +23,7 @@ const mediaSrc = art.data.src;
 
 <BaseLayout title={art.data.title} description={art.data.description}>
   <section class="detail">
+    <!-- Return and previous/next links retain the gallery the visitor came from. -->
     <a class="back" href="/portfolio" data-detail-back>Back to portfolio</a>
 
     <div class="detail-grid">
@@ -87,6 +89,7 @@ const mediaSrc = art.data.src;
 </BaseLayout>
 
 <script>
+  // Accept only known internal return pages so artwork links cannot redirect externally.
   const returnToOptions = new Set(['/', '/portfolio', '/curatorial']);
   const requestedReturnTo = new URLSearchParams(window.location.search).get('returnTo');
   const returnTo = requestedReturnTo && returnToOptions.has(requestedReturnTo)

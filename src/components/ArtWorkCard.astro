@@ -5,6 +5,7 @@ const mediaSrc = art.data.src;
 const detailHref = `/artwork/${art.id}/?returnTo=${encodeURIComponent(returnTo)}`;
 ---
 
+<!-- Shared artwork card used by portfolio and curatorial galleries. -->
 <article class="card" data-artwork-category={art.data.category}>
   <a href={detailHref} aria-label={`View ${art.data.title}`}>
     {mediaType === 'video' && mediaSrc ? (

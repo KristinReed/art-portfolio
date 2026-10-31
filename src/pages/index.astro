@@ -1,14 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ArtWorkCard from '../components/ArtWorkCard.astro';
 
 const artwork = (await getCollection('artwork')).sort((a, b) => b.data.year - a.data.year);
-const exhibiting = artwork.filter((art) => art.data.featured);
-const currentWork = artwork.filter((art) => art.data.currentWork && art.data.category !== 'Curatorial');
+const featuredWork = artwork.filter((art) => art.data.featured && art.data.category !== 'Curatorial');
 ---
 
 <BaseLayout description="Selected artwork and portfolio">
+  <!-- Landing page introduction and artist biography. -->
   <section class="intro">
     <p class="eyebrow">Artist — Victoria, BC</p>
     <h1>Memory, identity,<br />and traces of time.</h1>
@@ -37,75 +36,81 @@ const currentWork = artwork.filter((art) => art.data.currentWork && art.data.cat
     </div>
   </section>
 
+  <!-- Featured artwork carousel: exhibition details appear only when supplied in frontmatter. -->
   <section class="exhibition">
     <div class="section-heading">
       <p class="eyebrow">Featured</p>
-      <h2>Currently on exhibition</h2>
+      <h2>Featured work</h2>
     </div>
 
-    {exhibiting.length > 0 ? (
+    {featuredWork.length > 0 ? (
       <div
         class="exhibition-carousel"
         data-exhibition-carousel
         role="region"
         aria-roledescription="carousel"
-        aria-label="Currently on exhibition"
+        aria-label="Featured work"
       >
         <div class="exhibition-list">
-          {exhibiting.map((art, index) => (
+          {featuredWork.map((art, index) => (
             <article
               class="exhibition-panel"
               data-carousel-slide
               role="group"
               aria-roledescription="slide"
-              aria-label={`${index + 1} of ${exhibiting.length}: ${art.data.exhibitionName}`}
+              aria-label={`${index + 1} of ${featuredWork.length}: ${art.data.title}`}
               hidden={index !== 0}
             >
-              <a class="exhibition-art-link" href={`/artwork/${art.id}/?returnTo=%2F`} aria-label={`View ${art.data.title}`}>
-                {art.data.mediaType === 'video' && art.data.src ? (
-                  <video class="exhibition-art" muted playsinline preload="metadata" aria-label={art.data.alt}>
-                    <source src={art.data.src} type="video/mp4" />
-                  </video>
-                ) : art.data.mediaType === 'image' && art.data.src ? (
-                  <img
-                    class="exhibition-art"
-                    src={art.data.src}
-                    alt={art.data.alt}
-                  />
-                ) : (
-                  <div
-                    class="exhibition-art exhibition-placeholder"
-                    role="img"
-                    aria-label={art.data.alt}
-                    style={`background: ${art.data.placeholder};`}
-                  >
-                    <span>{art.data.title}</span>
-                  </div>
-                )}
-              </a>
+              <div class="exhibition-media-slot">
+                <a
+                  class:list={['exhibition-art-link', art.data.landscapeCard && 'exhibition-art-link-landscape']}
+                  href={`/artwork/${art.id}/?returnTo=%2F`}
+                  aria-label={`View ${art.data.title}`}
+                >
+                  {art.data.mediaType === 'video' && art.data.src ? (
+                    <video class="exhibition-art" muted playsinline preload="metadata" aria-label={art.data.alt}>
+                      <source src={art.data.src} type="video/mp4" />
+                    </video>
+                  ) : art.data.mediaType === 'image' && art.data.src ? (
+                    <img class="exhibition-art" src={art.data.src} alt={art.data.alt} />
+                  ) : (
+                    <div
+                      class="exhibition-art exhibition-placeholder"
+                      role="img"
+                      aria-label={art.data.alt}
+                      style={`background: ${art.data.placeholder};`}
+                    >
+                      <span>{art.data.title}</span>
+                    </div>
+                  )}
+                </a>
+              </div>
               <div class="exhibition-copy">
-                <p class="eyebrow">{art.data.exhibitionName}</p>
+                <p class="eyebrow">{art.data.exhibitionName ? 'On exhibition' : 'Current work'}</p>
                 <h3>{art.data.title}</h3>
                 <p>{art.data.description}</p>
-                <p class="exhibition-details">
-                  <span>{art.data.exhibitionLocation}</span>
-                  <span>{art.data.exhibitionDates}</span>
-                </p>
+                {art.data.exhibitionName && (
+                  <p class="exhibition-details">
+                    <span>{art.data.exhibitionName}</span>
+                    <span>{art.data.exhibitionLocation}</span>
+                    <span>{art.data.exhibitionDates}</span>
+                  </p>
+                )}
                 <a class="text-link" href={`/artwork/${art.id}/?returnTo=%2F`}>View artwork</a>
               </div>
-              {exhibiting.length > 1 && (
+              {featuredWork.length > 1 && (
                 <div class="exhibition-carousel-controls">
-                  <div class="carousel-dots" role="group" aria-label="Choose an exhibition">
-                    {exhibiting.map((exhibition, dotIndex) => (
+                  <div class="carousel-dots" role="group" aria-label="Choose featured work">
+                    {featuredWork.map((featured, dotIndex) => (
                       <button
                         type="button"
                         class="carousel-dot"
                         data-carousel-dot
                         data-slide-index={dotIndex}
-                        aria-label={`Show ${exhibition.data.exhibitionName}`}
+                        aria-label={`Show ${featured.data.title}`}
                         aria-current={index === dotIndex ? 'true' : undefined}
                       >
-                        <span class="visually-hidden">Show {exhibition.data.exhibitionName}</span>
+                        <span class="visually-hidden">Show {featured.data.title}</span>
                       </button>
                     ))}
                   </div>
@@ -116,28 +121,13 @@ const currentWork = artwork.filter((art) => art.data.currentWork && art.data.cat
         </div>
       </div>
     ) : (
-      <p class="empty-state">There are no works currently on exhibition.</p>
+      <p class="empty-state">There is no featured work to share right now.</p>
     )}
   </section>
-
-  <section class="gallery current-work">
-    <div class="section-heading">
-      <p class="eyebrow">In progress</p>
-      <h2>Current work</h2>
-    </div>
-
-    {currentWork.length > 0 ? (
-      <div class="grid">
-        {currentWork.map((art) => <ArtWorkCard art={art} returnTo="/" />)}
-      </div>
-    ) : (
-      <p class="empty-state">There is no current work to share right now.</p>
-    )}
-  </section>
-
 </BaseLayout>
 
 <script>
+  // Keep the active slide and its dot in sync; rotate every five seconds while this page is visible.
   const carousels = document.querySelectorAll<HTMLElement>('[data-exhibition-carousel]');
 
   carousels.forEach((carousel) => {
