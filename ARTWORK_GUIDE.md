@@ -35,17 +35,17 @@ placeholder: "linear-gradient(135deg, #d6d3d1, #f5f5f4)"
 | `category` | Yes | Gallery category; use `Curatorial` for exhibitions arranged by the artist |
 | `description` | Yes | Short description used on the artwork detail page |
 | `alt` | No | Accessible description for an image; defaults to `Artwork` |
-| `featured` | No | Set to `true` only while the artist's work is currently on exhibition; defaults to `false` |
-| `currentWork` | No | Set to `true` to feature work currently in progress or being focused on in the homepage’s Current work section; defaults to `false` |
-| `exhibitionName` | When `featured: true` | Name of the current exhibition |
-| `exhibitionLocation` | When `featured: true` | Venue and location of the current exhibition |
-| `exhibitionDates` | When `featured: true` | Show dates, for example `May 10 – June 20, 2026` |
+| `featured` | No | Set to `true` to include work in the homepage Featured work slideshow; defaults to `false` |
+| `seriesName` | No | Name of the artwork series; entries with the same name are grouped together on the Portfolio page |
+| `exhibitionName` | No | Exhibition name; provide this together with location and dates for featured work that is on exhibition |
+| `exhibitionLocation` | No | Venue and location; provide this together with exhibition name and dates |
+| `exhibitionDates` | No | Show dates; provide this together with exhibition name and location |
 | `mediaType` | No | `image`, `video`, or `placeholder`; defaults to `placeholder` |
 | `src` | No | Media URL under `public/`; omit to display a placeholder |
 | `landscapeCard` | No | Set to `true` for landscape proportions in gallery cards; defaults to `false` |
 | `placeholder` | No | CSS background value for placeholder media; defaults to a neutral gradient |
 
-For an artwork currently on exhibition, set `featured: true` and provide all three show details:
+For featured work currently on exhibition, set `featured: true` and provide all three show details. Featured work without exhibition details is labeled “Current work” in the homepage slideshow:
 
 ```md
 featured: true
@@ -54,7 +54,7 @@ exhibitionLocation: "Example Gallery, Victoria, BC"
 exhibitionDates: "May 10 – June 20, 2026"
 ```
 
-The collection schema rejects featured entries that omit any of these details. When the show ends, set `featured` back to `false` and remove or update its exhibition details.
+If any exhibition detail is provided, all three are required. When a show ends, remove or update the exhibition details; leave `featured: true` if the work should remain in the homepage slideshow as current work.
 
 ## Curatorial projects
 
@@ -85,8 +85,9 @@ Gallery cards and artwork detail media use a 4:5 portrait ratio by default and a
 
 ## Where entries appear
 
-- Artwork entries appear on the dedicated [Portfolio page](./src/pages/portfolio.astro), sorted newest first, except entries marked `currentWork: true`; those appear in the homepage’s Current work section instead. Curatorial entries are also excluded from the Portfolio gallery.
-- Artwork marked `featured: true` also appears in the homepage’s “Currently on exhibition” section with the exhibition name, location, and dates. If there are no active shows, the section displays an empty message.
-- Artwork marked `currentWork: true` appears in the homepage’s “Current work” section, after current exhibitions, and is omitted from the Portfolio gallery to keep the groups separate. Multiple entries can be marked current; the section displays an empty message when none are marked.
+- Artwork entries appear on the dedicated [Portfolio page](./src/pages/portfolio.astro), sorted newest first. Curatorial entries are excluded from this gallery.
+- Portfolio artwork with the same `seriesName` is grouped under a series heading. Entries without a `seriesName` appear in the Standalone work section.
+- Artwork marked `featured: true` appears in the homepage’s “Featured work” slideshow, which advances every five seconds and has clickable navigation dots. Entries with exhibition details are labeled “On exhibition” and show the name, location, and dates; featured entries without exhibition details are labeled “Current work.” Featured work remains part of its series or Standalone work section in the Portfolio.
+- In the slideshow, portrait artwork uses a 4:5 card and artwork marked `landscapeCard: true` uses a 5:4 landscape card centered in the same fixed media slot.
 - Curatorial entries appear on the dedicated Curatorial page, sorted newest first. If there are no curatorial entries, that page displays an empty message.
 - Every entry has a detail page at `/artwork/<filename>/`, where `<filename>` is the Markdown filename without its `.md` extension.

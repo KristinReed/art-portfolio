@@ -7,6 +7,7 @@ category: "Paintings"
 description: "A warm floral study that centers on repetition, softness, and the intimacy of everyday objects."
 alt: "Acrylic painting of chamomile-like flowers with warm color and layered texture"
 featured: false
+seriesName: "Routine"
 mediaType: "image"
 src: "/artwork/Routine_3_(Chamomile).png"
 placeholder: "linear-gradient(135deg, #d7d1c7, #efe9e1)"

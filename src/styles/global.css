@@ -173,25 +173,41 @@ p {
   display: none;
 }
 
+.exhibition-media-slot {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+}
+
 .exhibition-art-link {
-  display: block;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.exhibition-art-link-landscape {
+  width: auto;
+  height: 64%;
+  aspect-ratio: 5 / 4;
 }
 
 .exhibition-art {
   display: block;
   width: 100%;
-  height: 220px;
+  height: 100%;
   object-fit: contain;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: var(--card);
 }
 
 .exhibition-placeholder {
   position: relative;
   display: grid;
   place-items: end start;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .exhibition-placeholder span {
@@ -286,6 +302,21 @@ p {
 .gallery {
   display: grid;
   gap: 2rem;
+}
+
+.portfolio-group {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.portfolio-group[hidden] {
+  display: none;
+}
+
+.portfolio-group h2 {
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+  letter-spacing: -0.05em;
+  font-weight: 500;
 }
 
 .categories {

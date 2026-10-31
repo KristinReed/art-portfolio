@@ -11,6 +11,7 @@ exhibitionName: "The Observatory"
 exhibitionLocation: "Room B102 Visual Arts Building, University of Victoria"
 exhibitionDates: "March 19, 2026 – March 25, 2026"
 landscapeCard: true
+seriesName: "Where Memories Dwell"
 mediaType: "image"
 src: "/artwork/Where_Memories_Dwell_1-3_2025.jpg"
 placeholder: "linear-gradient(135deg, #d5d5d5, #f1f1f1)"

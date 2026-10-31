@@ -19,6 +19,7 @@ const siteName = 'Shayna Reed';
     <title>{title === 'Artist Name' ? title : `${title} | ${siteName}`}</title>
   </head>
   <body>
+    <!-- Shared site navigation and page frame. -->
     <header>
       <a class="brand" href="/">{siteName}</a>
       <nav>
@@ -29,10 +30,12 @@ const siteName = 'Shayna Reed';
       </nav>
     </header>
 
+    <!-- Individual pages render their content here. -->
     <main>
       <slot />
     </main>
 
+    <!-- Shared copyright footer. -->
     <footer>
       <p>© {new Date().getFullYear()} {siteName}. All rights reserved.</p>
     </footer>
